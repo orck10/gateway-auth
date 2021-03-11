@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.gateway.autenticacao.dao.UserDAO;
-import br.com.gateway.autenticacao.dto.UserDTO;
 
 @Service
 public class UserLoginService implements UserDetailsService{
@@ -21,7 +20,7 @@ public class UserLoginService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserDTO user = null;
+		br.com.gateway.autenticacao.model.User user = null;
 		try {
 			user = dao.getByName(username).get(0);
 		}

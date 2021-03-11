@@ -5,8 +5,8 @@ import java.util.UUID;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import br.com.gateway.autenticacao.dto.UserDTO;
+import br.com.gateway.autenticacao.model.User;
 
-public interface UserRepository extends MongoRepository<UserDTO, UUID> {
-	public List<UserDTO> findByName(String name);
+public interface UserRepository extends MongoRepository<User, UUID> {
+	public List<User> findByName(String name);
 }

@@ -3,14 +3,14 @@ package br.com.gateway.autenticacao.dao;
 import java.util.List;
 import java.util.UUID;
 
-import br.com.gateway.autenticacao.dto.UserDTO;
+import br.com.gateway.autenticacao.model.User;
 
 public interface UserDAO {
-	public UserDTO getById(UUID id);
+	public User getById(UUID id);
 	
-	public List<UserDTO> getAll();
+	public List<User> getAll();
 	
-	public UserDTO save(UserDTO user);
+	public User save(User user);
 	
-	public List<UserDTO> getByName(String Name);
+	public List<User> getByName(String Name);
 }

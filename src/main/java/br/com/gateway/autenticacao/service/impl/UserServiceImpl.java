@@ -10,6 +10,7 @@ import br.com.gateway.autenticacao.dao.UserDAO;
 import br.com.gateway.autenticacao.dto.RestTemplate;
 import br.com.gateway.autenticacao.dto.RestTemplateError;
 import br.com.gateway.autenticacao.dto.UserDTO;
+import br.com.gateway.autenticacao.model.User;
 import br.com.gateway.autenticacao.service.UserService;
 import br.com.gateway.autenticacao.utils.StringUtils;
 
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public ResponseEntity<?> getAll() {
 		RestTemplate response = new RestTemplate(
-				dao.getAll(),
+			 	new UserDTO().parseList(dao.getAll(), false),
 				HttpStatus.OK.toString());
 		return new ResponseEntity<RestTemplate>(response, HttpStatus.OK);
 	}
@@ -36,7 +37,9 @@ public class UserServiceImpl implements UserService{
 		if(name != null && !name.isEmpty() && password != null && !password.isEmpty()) {
 			String passwordHash = new StringUtils().encrypt(key, password);
 			if(dao.getByName(name).isEmpty()) {
-				UserDTO dto = dao.save(new UserDTO(null, name, passwordHash));
+				UserDTO dto = new UserDTO().parse(
+						dao.save(new User(null, name, passwordHash, null)), 
+						false);
 				RestTemplate response = new RestTemplate(
 						dto,
 						HttpStatus.CREATED.toString());
